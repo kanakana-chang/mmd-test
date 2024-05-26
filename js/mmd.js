@@ -1,8 +1,8 @@
-import * as THREE from "three";
-import { MMDLoader } from "three/addons/loaders/MMDLoader.js";
-import { MMDAnimationHelper } from "three/addons/animation/MMDAnimationHelper.js";
-import { OrbitControls } from "three/addons/controls/OrbitControls.js";
-import { GUI } from "three/addons/libs/lil-gui.module.min.js";
+import * as THREE from 'three';
+import { MMDLoader } from 'three/addons/loaders/MMDLoader.js';
+import { MMDAnimationHelper } from 'three/addons/animation/MMDAnimationHelper.js';
+import { OrbitControls } from 'three/addons/controls/OrbitControls.js';
+import { GUI } from 'three/addons/libs/lil-gui.module.min.js';
 
 let scene, camera, renderer, helper;
 
@@ -23,12 +23,7 @@ function init() {
   scene.background = new THREE.Color(0x000f1e);
 
   // カメラを作成する
-  camera = new THREE.PerspectiveCamera(
-    45,
-    window.innerWidth / window.innerHeight,
-    1,
-    2000
-  );
+  camera = new THREE.PerspectiveCamera(45, window.innerWidth / window.innerHeight, 1, 2000);
   camera.position.z = 30;
 
   // レンダラーを作成する
@@ -52,26 +47,26 @@ function init() {
   scene.add(gridHelper);
 
   // モデルファイル
-  const modelFile = "models/mmd/alicia/Alicia_solid.pmx";
+  const modelFile = 'models/mmd/alicia/Alicia_solid.pmx';
 
   // モーションファイル
   const vmdFiles = [
-    "models/mmd/vmds/2分ループステップ1.vmd",
-    "models/mmd/vmds/2分ループステップ5.vmd",
-    "models/mmd/vmds/2分ループステップ7.vmd",
-    "models/mmd/vmds/2分ループステップ8.vmd",
-    "models/mmd/vmds/2分ループステップ10.vmd",
-    "models/mmd/vmds/2分ループステップ17.vmd",
-    "models/mmd/vmds/2分ループステップ19.vmd",
-    "models/mmd/vmds/2分ループステップ20.vmd",
-    "models/mmd/vmds/2分ループステップ21.vmd",
-    "models/mmd/vmds/2分ループステップ22.vmd",
-    "models/mmd/vmds/2分ループステップ23.vmd",
-    "models/mmd/vmds/2分ループステップ28.vmd",
-    "models/mmd/vmds/2分ループステップ29.vmd",
-    "models/mmd/vmds/2分ループステップ31.vmd",
-    "models/mmd/vmds/2分ループステップ36.vmd",
-    "models/mmd/vmds/2分ループステップ37.vmd",
+    'models/mmd/vmds/2分ループステップ1.vmd',
+    'models/mmd/vmds/2分ループステップ5.vmd',
+    'models/mmd/vmds/2分ループステップ7.vmd',
+    'models/mmd/vmds/2分ループステップ8.vmd',
+    'models/mmd/vmds/2分ループステップ10.vmd',
+    'models/mmd/vmds/2分ループステップ17.vmd',
+    'models/mmd/vmds/2分ループステップ19.vmd',
+    'models/mmd/vmds/2分ループステップ20.vmd',
+    'models/mmd/vmds/2分ループステップ21.vmd',
+    'models/mmd/vmds/2分ループステップ22.vmd',
+    'models/mmd/vmds/2分ループステップ23.vmd',
+    'models/mmd/vmds/2分ループステップ28.vmd',
+    'models/mmd/vmds/2分ループステップ29.vmd',
+    'models/mmd/vmds/2分ループステップ31.vmd',
+    'models/mmd/vmds/2分ループステップ36.vmd',
+    'models/mmd/vmds/2分ループステップ37.vmd'
   ];
 
   // MMD モデルのアニメーションを処理するためのオブジェクト
@@ -134,30 +129,30 @@ function initGui(mesh) {
     changeMotion() {
       this.motionIndex = (this.motionIndex + 1) % mesh.animations.length;
       playMotion(mesh.animations[this.motionIndex]);
-    },
+    }
   };
 
   const gui = new GUI();
 
   // アニメーションを再生・停止するチェックボックスを追加する
-  const animationController = gui.add(api, "animation");
-  animationController.name("アニメーション");
+  const animationController = gui.add(api, 'animation');
+  animationController.name('アニメーション');
 
   animationController.onChange(() => {
-    helper.enable("animation", api.animation);
+    helper.enable('animation', api.animation);
   });
 
   // シーンの背景色を変更するカラーピッカーを追加する
-  const colorController = gui.addColor(api, "color");
-  colorController.name("背景色");
+  const colorController = gui.addColor(api, 'color');
+  colorController.name('背景色');
 
   colorController.onChange(() => {
     scene.background = new THREE.Color(api.color);
   });
 
   // モーションを切り替えるボタンを追加する
-  const motionController = gui.add(api, "changeMotion");
-  motionController.name("モーションを切り替える");
+  const motionController = gui.add(api, 'changeMotion');
+  motionController.name('モーションを切り替える');
 
   // アニメーションプレイヤー
   const mixer = helper.objects.get(mesh).mixer;
@@ -172,7 +167,7 @@ function initGui(mesh) {
 
 // ウィンドウの大きさが変更されたときに実行される
 // カメラのアスペクト比と <canvas> のサイズを更新する
-window.addEventListener("resize", () => {
+window.addEventListener('resize', () => {
   camera.aspect = window.innerWidth / window.innerHeight;
   camera.updateProjectionMatrix();
 
